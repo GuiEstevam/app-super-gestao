@@ -1,18 +1,29 @@
-<h3> Fornecedor </h3>
+<h3> Fornecedores </h3>
 
 @php
-    // if(){
-
-    // }elseif(){
-
-    // }
 
 @endphp
 
-@if (count ($fornecedores)> 0 && count($fornecedores) < 10 )
-    <h3> Existem alguns fornecedores cadastrados</h3>
-@elseif(count($fornecedores)>10)
-    <h3> Existem varios fornecedores cadastrados</h3>
-@else 
-    <h3> Ainda nao existem fornecedores cadastrados</h3>
-@endif
+@isset($fornecedores)
+
+   @forelse($fornecedores as $indice => $fornecedor)
+    Iteração atual:{{ $loop->iteration}}<br>
+        Fornecedor: {{$fornecedor['nome']}}
+        <br>
+        Status: {{$fornecedor['status']}}
+        <br>   
+        CNPJ: {{$fornecedor['cnpj'] ?? 'Esse dado não está disponível'}}
+        <br>
+        Telefone: ({{$fornecedor['ddd'] ?? 'Esse dado não está disponível'}}) {{$fornecedor['telefone'] ?? 'Esse dado não está disponível'}}
+        <br>
+        @if($loop->last)
+           Quantidade de registros:{{$loop->count}}
+        @endif
+        <hr>
+
+    @empty
+        Não existem fornecedores cadastrados
+    @endforelse
+@endisset
+
+<br>
