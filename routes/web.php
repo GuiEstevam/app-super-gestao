@@ -4,6 +4,7 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
 use App\Http\Controllers\TesteController;
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+Route::get('/', [PrincipalController::class, 'principal'])->name('site.index')->middleware('LogAcessoMiddleware::class');
 
 Route::get('/sobre-nos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 
